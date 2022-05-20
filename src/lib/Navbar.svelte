@@ -2,7 +2,7 @@
 	import QoedLogo from '../lib/QoedLogo.svelte';
 </script>
 
-<nav class="flex w-full">
+<nav class="flex w-full mb">
 	<ul class="flex w-full">
 		<li class="text-primary nav-item">
 			<QoedLogo />
