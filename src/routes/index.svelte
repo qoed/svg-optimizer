@@ -19,14 +19,18 @@
 	let showPreview = false;
 	let completed = 0;
 	let disabled = true;
-	/** @type {{optimized: {name: string; content: string}[]; preOptimized: {name: string; content: string}[]; iconify: Record<string, any> | undefined; unpluginIconSet: Record<string, any> | undefined;} }*/
-	let results = { optimized: [], preOptimized: [], iconify: undefined, unpluginIconSet: undefined };
+	/**
+	 * @type {{optimizedSvg: {name: string; content: string}[]; svg: {name: string; content: string}[]; iconify: string; unpluginIconSet: string;} }
+	 */
+	let results = { optimizedSvg: [], svg: [], iconify: '', unpluginIconSet: '' };
 	let errorMessages = [];
 	let collection = '';
 
 	$: allFilesParsed(completed);
 
-	/**@type {(numberOfFiles: number) => void}*/
+	/**
+	 * @param {number} numberOfFiles
+	 */
 	function allFilesParsed(numberOfFiles) {
 		if (files && data.length === files.length && data.length !== 0) {
 			disabled = false;
@@ -39,7 +43,6 @@
 	function clean() {
 		files = null;
 		data = [];
-		// previewContainer.innerHTML = '';
 	}
 
 	function handleClick() {
@@ -47,7 +50,9 @@
 		fileInput.click();
 	}
 
-	/**@type {(e: CustomEvent) => void} */
+	/**
+	 * @param {{ detail: { files: FileList }; }} e
+	 */
 	function handleFiles(e) {
 		clean();
 		files = e.detail.files;
@@ -68,7 +73,9 @@
 		}
 	}
 
-	/**@type {(file: File) => void}*/
+	/**
+	 * @param {File} file
+	 */
 	function readFileContents(file) {
 		let reader = new FileReader();
 
@@ -174,21 +181,21 @@
 		</section>
 	{/if}
 	<section>
-		{#if results.optimized.length > 0}
+		{#if results.optimizedSvg.length > 0}
 			<h2>Optimized SVGs</h2>
 		{/if}
 		<div class="results-grid">
-			{#each results.optimized as op}
+			{#each results.optimizedSvg as op}
 				<SvgCard svg={op} />
 			{/each}
 		</div>
 	</section>
 	<section>
-		{#if results.preOptimized.length > 0}
+		{#if results.svg.length > 0}
 			<h2>Original SVGs</h2>
 		{/if}
 		<div class="results-grid">
-			{#each results.preOptimized as preOp}
+			{#each results.svg as preOp}
 				<SvgCard svg={preOp} showDownload={false} />
 			{/each}
 		</div>
