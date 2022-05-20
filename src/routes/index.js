@@ -93,6 +93,8 @@ export const post = async ({ request }) => {
 		unpluginIconSet[prefix] = {
 			...unpluginIconSet[prefix],
 			[cleanupIconKeyword(f.name.replace('.svg', ''))]: minifiedSvg
+				.replace(/width="\d+"/, '')
+				.replace(/height="\d+"/, '')
 		};
 
 		optimized.push({ name: f.name, content: minifiedSvg });
