@@ -15,7 +15,7 @@ export const post = async ({ request }) => {
 
 		for (var f of files) {
 			let keyword = cleanupIconKeyword(f.name.replace('.svg', ''));
-			console.log(keyword);
+
 			const svg = new SVG(f.content);
 			await cleanupSVG(svg);
 			iconSet.fromSVG(keyword, svg);
