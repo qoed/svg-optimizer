@@ -17,9 +17,10 @@ export function fileinput(node) {
 	};
 }
 
-/**@type {(file: {name: string; content: string}) => any} */
-export function createDownload(file) {
-	const downloadFile = new File([file.content], file.name, { type: 'image/svg+xml' });
+/**@type {(file: {name: string; content: any}, options: {type: "image" | "json"}) => any} */
+export function createDownload(file, options) {
+	const type = { type: options.type === 'image' ? 'image/svg+xml' : 'application/json' };
+	const downloadFile = new File([file.content], file.name, type);
 	const reader = new FileReader();
 	reader.readAsDataURL(downloadFile);
 	reader.addEventListener(

@@ -10,6 +10,7 @@ Drag and drop a set of SVGs and download the optimized versions.
 - ⬇️ Simple drag and drop inteface
 - 💻 Run locally, no need to upload your data to someone elses server
 - ⚡ Powered by [@iconify/tools](https://github.com/iconify/tools)
+- 🪄 Export to [unplugin-icons custom icon set](https://github.com/antfu/unplugin-icons#custom-icons), IconifyJSON, or individual SVG files
 
 ## Run the app
 

@@ -23,7 +23,7 @@
 			<button
 				class="flex flex-col items-center justify-center pad icon-button-sm rounded w-full h-full"
 				type="button"
-				on:click={() => createDownload(svg)}
+				on:click={() => createDownload(svg, { type: 'image' })}
 			>
 				<span class="my-1 text-base self-start">{svg.name}</span>
 				<span class="text-2xl flex"><IcDownload /></span>

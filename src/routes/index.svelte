@@ -5,6 +5,8 @@
 	import Navbar from '$lib/Navbar.svelte';
 	import Dropzone from '$lib/Dropzone.svelte';
 	import Head from '$lib/Head.svelte';
+	import { createDownload } from '$lib/file';
+	import IcDownload from '$lib/IcDownload.svelte';
 
 	/**@type {HTMLInputElement}*/
 	let fileInput;
@@ -17,9 +19,10 @@
 	let showPreview = false;
 	let completed = 0;
 	let disabled = true;
-	/** @type {{optimized: {name: string; content: string}[]; preOptimized: {name: string; content: string}[];}}*/
-	let results = { optimized: [], preOptimized: [] };
+	/** @type {{optimized: {name: string; content: string}[]; preOptimized: {name: string; content: string}[]; iconify: Record<string, any> | undefined; unpluginIconSet: Record<string, any> | undefined;} }*/
+	let results = { optimized: [], preOptimized: [], iconify: undefined, unpluginIconSet: undefined };
 	let errorMessages = [];
+	let collection = '';
 
 	$: allFilesParsed(completed);
 
@@ -84,7 +87,8 @@
 		const res = await fetch('/', {
 			method: 'POST',
 			body: JSON.stringify({
-				data
+				data,
+				prefix: collection
 			}),
 			headers: {
 				accept: 'application/json'
@@ -92,6 +96,7 @@
 		});
 
 		const body = await res.json();
+		console.log(body);
 		results = body;
 	}
 </script>
@@ -122,7 +127,51 @@
 
 	<PreviewLane {showPreview} bind:data />
 	{#if files}
+		<div class="collection-input-container">
+			<label for="collection">Collection name</label>
+			<input
+				class="collection"
+				type="text"
+				name="collection"
+				id="collection"
+				form="svg-form"
+				required
+				bind:value={collection}
+			/>
+		</div>
 		<button form="svg-form" class="button-bg my pad rounded text-lg" {disabled}>Upload</button>
+	{/if}
+
+	{#if results.unpluginIconSet}
+		<section>
+			<button
+				class="flex items-center justify-center pad icon-button-sm rounded w-full h-full"
+				type="button"
+				on:click={() =>
+					createDownload(
+						{ name: collection + '-unplugin-icons', content: results.unpluginIconSet },
+						{ type: 'json' }
+					)}
+				><span class="text-2xl flex"><IcDownload /></span><span class="ml"
+					>unplugin-icons Custom Icon Set</span
+				></button
+			>
+		</section>
+	{/if}
+	{#if results.iconify}
+		<section>
+			<button
+				class="flex items-center justify-center pad icon-button-sm rounded w-full h-full"
+				type="button"
+				on:click={() =>
+					createDownload(
+						{ name: collection + '-iconify', content: results.iconify },
+						{ type: 'json' }
+					)}
+				><span class="text-2xl flex"><IcDownload /></span><span class="ml">IconifyJSON</span
+				></button
+			>
+		</section>
 	{/if}
 	<section>
 		{#if results.optimized.length > 0}
@@ -147,6 +196,13 @@
 </main>
 
 <style>
+	.collection-input-container {
+		margin: 2rem 0;
+	}
+	.collection {
+		padding: 0.5rem 1rem;
+		margin-left: 1rem;
+	}
 	.results-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
