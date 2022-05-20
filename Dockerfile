@@ -14,5 +14,6 @@ RUN npm init -y
 RUN npm install @iconify/tools
 COPY --chown=node:node --from=builder /home/node/build ./build
 RUN ls -l
+RUN ls -l build
 EXPOSE 3000
 CMD ["node", "build/index.js"]
