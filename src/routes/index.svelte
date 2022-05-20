@@ -10,8 +10,6 @@
 
 	/**@type {HTMLInputElement}*/
 	let fileInput;
-	/**@type {HTMLElement}*/
-	let previewContainer;
 	/**@type {FileList | null | undefined}*/
 	let files;
 	/**@type {any[]}*/
