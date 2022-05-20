@@ -96,7 +96,7 @@
 		});
 
 		const body = await res.json();
-		console.log(body);
+
 		results = body;
 	}
 </script>
