@@ -133,6 +133,9 @@ svg {
 .text-primary {
 	color: var(--primary);
 }
+.text-sm {
+	font-size: 1.2rem;
+}
 .text-lg {
 	font-size: large;
 }
