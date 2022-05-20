@@ -26,7 +26,3 @@ npm run dev
 npm run dev -- --open
 
 ```
-
-## Upcoming features
-
-- Export to `IconifyJSON` icon set
