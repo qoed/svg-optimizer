@@ -1,0 +1,5 @@
+build
+docker*
+Docker*
+node_modules
+.svelte-kit
