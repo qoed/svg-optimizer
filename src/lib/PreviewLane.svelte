@@ -1,12 +1,24 @@
 <script>
 	/**@type {boolean}*/
 	export let showPreview;
-	export let previewContainer;
+
+	/**@type {any[]}*/
+	export let data;
 </script>
 
 <section class:hidden={!showPreview} class="pad rounded">
 	<h2>Selected</h2>
-	<div class="preview pad rounded" bind:this={previewContainer} />
+	<div class="preview pad rounded">
+		{#each data as file}
+			<div class="flex flex-col items-center">
+				{@html file.content}
+				<div class="flex items-center my-1">
+					<label class="text-sm" for={file.name}>Preserve color</label>
+					<input class="ml" id={file.name} type="checkbox" bind:checked={file.preserveColor} />
+				</div>
+			</div>
+		{/each}
+	</div>
 </section>
 
 <style>
@@ -19,6 +31,7 @@
 	}
 	.preview {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(6rem, auto));
+		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+		gap: 1rem;
 	}
 </style>
