@@ -26,37 +26,41 @@
 	function allFilesParsed(numberOfFiles) {
 		if (files && data.length === files.length && data.length !== 0) {
 			disabled = false;
+			showPreview = true;
+
 			return;
 		}
+	}
+
+	function clean() {
+		files = null;
+		data = [];
+		// previewContainer.innerHTML = '';
+	}
+
+	function handleClick() {
+		clean();
+		fileInput.click();
+	}
+
+	/**@type {(e: CustomEvent) => void} */
+	function handleFiles(e) {
+		clean();
+		files = e.detail.files;
+		validateFiles();
 	}
 
 	function validateFiles() {
 		if (!files) return;
 
 		for (let i = 0; i < files.length; i++) {
-			if (files[i].type !== 'image/svg+xml') {
-				errorMessages.push({ file: files[i].name });
+			let file = files[i];
+			if (file.type !== 'image/svg+xml') {
+				errorMessages.push({ file: file.name });
 				continue;
 			}
 
-			addPreview(files[i]);
-			readFileContents(files[i]);
-		}
-	}
-
-	/**@type {(file: File) => void}*/
-	function addPreview(file) {
-		const img = document.createElement('img');
-		const objectUrl = URL.createObjectURL(file);
-		img.src = objectUrl;
-		img.height = 60;
-		img.onload = function () {
-			URL.revokeObjectURL(objectUrl);
-		};
-
-		previewContainer?.appendChild(img);
-		if (!showPreview) {
-			showPreview = true;
+			readFileContents(file);
 		}
 	}
 
@@ -67,7 +71,7 @@
 		reader.addEventListener('loadend', () => {
 			let dataString = reader.result;
 			if (typeof dataString === 'string') {
-				data.push({ name: file.name, content: dataString });
+				data = [...data, { name: file.name, content: dataString, preserveColor: false }];
 				completed += 1;
 			}
 		});
@@ -87,31 +91,13 @@
 		});
 
 		const body = await res.json();
-
 		results = body;
-	}
-
-	function handleClick() {
-		files = null;
-		data = [];
-		previewContainer.innerHTML = '';
-		fileInput.click();
-	}
-
-	/**@type {(e: CustomEvent) => void} */
-	function handleFiles(e) {
-		files = null;
-		data = [];
-		previewContainer.innerHTML = '';
-		files = e.detail.files;
-		validateFiles();
 	}
 </script>
 
 <Navbar />
 
 <main>
-	<!-- <img src={logo} alt="qoed Logo" /> -->
 	<Dropzone {handleFiles}>
 		<form id="svg-form" on:submit|preventDefault={handleSubmit} class="flex flex-col items-center">
 			<input
@@ -131,7 +117,7 @@
 		</form>
 	</Dropzone>
 
-	<PreviewLane {showPreview} bind:previewContainer />
+	<PreviewLane {showPreview} bind:data />
 	{#if files}
 		<button form="svg-form" class="button-bg my pad rounded text-lg" {disabled}>Upload</button>
 	{/if}
