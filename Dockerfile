@@ -5,7 +5,6 @@ COPY --chown=node:node ./package*.json ./
 RUN npm install
 COPY --chown=node:node . .
 RUN npm run build
-RUN ls -l
 EXPOSE 3000
 CMD ["node", "build/index.js"]
 
