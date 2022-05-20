@@ -14,7 +14,7 @@
 
 <div
 	class="items-center flex flex-col rounded pad svg-card"
-	title="Click to download"
+	title={showDownload ? 'Click to download' : ''}
 	on:click={() => (blank = true)}
 	on:mouseleave={() => (blank = false)}
 >
@@ -33,19 +33,7 @@
 	<div class="svg-container">
 		{@html svg.content}
 	</div>
-	<!-- {#if showDownload}
-		<button
-			class="flex items-center pad mb icon-button-sm rounded"
-			type="button"
-			on:click={() => createDownload(svg)}
-		>
-			<IcDownload /> <span class="ml text-base">{svg.name}</span>
-		</button>
-	{:else}
-		<p class="flex items-center pad mb rounded">
-			<span class="text-base">{svg.name}</span>
-		</p>
-	{/if} -->
+
 	<button
 		class="flex items-center mt code-button"
 		type="button"
