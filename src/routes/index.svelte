@@ -4,6 +4,7 @@
 	import PreviewLane from '$lib/PreviewLane.svelte';
 	import Navbar from '$lib/Navbar.svelte';
 	import Dropzone from '$lib/Dropzone.svelte';
+	import Head from '$lib/Head.svelte';
 
 	/**@type {HTMLInputElement}*/
 	let fileInput;
@@ -94,6 +95,8 @@
 		results = body;
 	}
 </script>
+
+<Head />
 
 <Navbar />
 
