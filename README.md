@@ -1,13 +1,15 @@
 # SVG Optimizer
 
-SvelteKit App that optimizes SVGs
+SvelteKit App that optimizes SVGs.
 
 Drag and drop a set of SVGs and download the optimized versions.
+
+Check out the [demo](https://svg-optimizer.qoed.dev/).
 
 ## Overview
 
 - ✨ Optimize your SVGs exported from Inkscape, Affinity Designer, Illustrator etc..
-- ⬇️ Simple drag and drop inteface
+- ⬇️ Simple drag and drop interface
 - 💻 Run locally, no need to upload your data to someone elses server
 - ⚡ Powered by [@iconify/tools](https://github.com/iconify/tools)
 - 🪄 Export to [unplugin-icons custom icon set](https://github.com/antfu/unplugin-icons#custom-icons), IconifyJSON, or individual SVG files

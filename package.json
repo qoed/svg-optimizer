@@ -2,6 +2,7 @@
 	"name": "svg-optimizer",
 	"version": "0.0.1",
 	"private": true,
+	"author": "Jonas Musekura Lundsholm <jonas@qoed.dev>",
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
