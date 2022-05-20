@@ -1,4 +1,4 @@
-FROM node:lts-alpine AS builder
+FROM node:lts-alpine
 USER node
 WORKDIR /home/node
 COPY --chown=node:node ./package*.json ./
