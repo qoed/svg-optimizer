@@ -2,11 +2,9 @@
 	import IcOutlineDriveFolderUpload from '../lib/IcOutlineDriveFolderUpload.svelte';
 	import SvgCard from '$lib/SvgCard.svelte';
 	import PreviewLane from '$lib/PreviewLane.svelte';
-	import Navbar from '$lib/Navbar.svelte';
 	import Dropzone from '$lib/Dropzone.svelte';
 	import Head from '$lib/Head.svelte';
-	import { createDownload } from '$lib/file';
-	import IcDownload from '$lib/IcDownload.svelte';
+	import IconSetDownload from '$lib/IconSetDownload.svelte';
 
 	/**@type {HTMLInputElement}*/
 	let fileInput;
@@ -129,6 +127,7 @@
 	</Dropzone>
 
 	<PreviewLane {showPreview} bind:data />
+
 	{#if files}
 		<div class="collection-input-container">
 			<label for="collection">Collection name</label>
@@ -147,36 +146,24 @@
 	{/if}
 
 	{#if results.unpluginIconSet}
-		<section>
-			<button
-				class="flex items-center justify-center pad icon-button-sm rounded w-full h-full"
-				type="button"
-				on:click={() =>
-					createDownload(
-						{ name: collection + '-unplugin-icons', content: results.unpluginIconSet },
-						{ type: 'json' }
-					)}
-				><span class="text-2xl flex"><IcDownload /></span><span class="ml"
-					>unplugin-icons Custom Icon Set</span
-				></button
-			>
-		</section>
+		<h2>Icon Sets</h2>
+		<IconSetDownload
+			{collection}
+			iconSet={results.unpluginIconSet}
+			type="unplugin-icons"
+			label="unplugin-icons"
+		/>
 	{/if}
+
 	{#if results.iconify}
-		<section>
-			<button
-				class="flex items-center justify-center pad icon-button-sm rounded w-full h-full"
-				type="button"
-				on:click={() =>
-					createDownload(
-						{ name: collection + '-iconify', content: results.iconify },
-						{ type: 'json' }
-					)}
-				><span class="text-2xl flex"><IcDownload /></span><span class="ml">IconifyJSON</span
-				></button
-			>
-		</section>
+		<IconSetDownload
+			{collection}
+			iconSet={results.iconify}
+			type="IconifyJSON"
+			label="IconifyJSON"
+		/>
 	{/if}
+
 	<section>
 		{#if results.optimizedSvg.length > 0}
 			<h2>Optimized SVGs</h2>
