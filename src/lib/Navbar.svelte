@@ -2,10 +2,10 @@
 	import QoedLogo from '../lib/QoedLogo.svelte';
 </script>
 
-<nav class="flex w-full mb">
-	<ul class="flex w-full">
+<nav class="flex mb">
+	<ul class="flex">
 		<li class="text-primary nav-item">
-			<QoedLogo />
+			<QoedLogo width="50" height="50" />
 		</li>
 		<li class="nav-item flex items-center">
 			<h1>SVG Optimizer</h1>
@@ -15,8 +15,7 @@
 
 <style>
 	.nav-item {
-		height: 50px;
-		min-width: 5rem;
+		height: 5rem;
 		padding: 1rem;
 	}
 </style>

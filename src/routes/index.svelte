@@ -108,8 +108,6 @@
 
 <Head />
 
-<Navbar />
-
 <main>
 	<Dropzone {handleFiles}>
 		<form id="svg-form" on:submit|preventDefault={handleSubmit} class="flex flex-col items-center">
@@ -135,8 +133,9 @@
 		<div class="collection-input-container">
 			<label for="collection">Collection name</label>
 			<input
-				class="collection"
+				class="collection-input"
 				type="text"
+				placeholder="my-custom-icons"
 				name="collection"
 				id="collection"
 				form="svg-form"
@@ -203,10 +202,17 @@
 <style>
 	.collection-input-container {
 		margin: 2rem 0;
+		display: grid;
+		gap: 1rem;
 	}
-	.collection {
+	.collection-input {
+		border-radius: 0.5rem;
+		border: none;
+		outline: var(--gray) solid 0.25rem;
 		padding: 0.5rem 1rem;
-		margin-left: 1rem;
+	}
+	.collection-input:focus-visible {
+		outline: var(--info) solid 0.25rem;
 	}
 	.results-grid {
 		display: grid;

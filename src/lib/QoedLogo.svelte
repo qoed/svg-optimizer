@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="32" height="32" {...$$props}
 	><g fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"
 		><path fill="none" d="M0 0h180v180H0z" /><path
 			fill="#d76525"
