@@ -1,5 +1,7 @@
+node_modules
+.git
+.svelte-kit
 build
 docker*
 Docker*
-node_modules
-.svelte-kit
+svg-optimizer.tar
