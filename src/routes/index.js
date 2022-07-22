@@ -10,7 +10,7 @@ import {
 } from '@iconify/tools';
 
 /**@type {import('@sveltejs/kit').RequestHandler} */
-export const post = async ({ request }) => {
+export const POST = async ({ request }) => {
 	const { data, prefix } = await request.json();
 	/** @type {{ name: string; content: string; }[]}*/
 	const optimizedSvg = [];
